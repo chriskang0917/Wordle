@@ -5,10 +5,10 @@
 - words collection
 
 ### Skills
-- vite
-- JavaScript / TypeScript
-- useState / useReducer
-- styled-components / tailwind
+- [vite](https://vitejs.dev/guide/)
+- JavaScript / [TypeScript](https://react-typescript-cheatsheet.netlify.app/)
+- useState / [useReducer](https://beta.reactjs.org/reference/react/useReducer)
+- styled-components / [tailwind](https://tailwindcss.com/docs/guides/vite)
 
 ### Phase 0
 - Setup Project
