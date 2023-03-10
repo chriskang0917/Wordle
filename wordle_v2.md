@@ -16,8 +16,7 @@
 ### Phase 1
 - Add wordle page
 - Implement wordle logic
-    - Colors
-    - Design state
+    - [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy-step-1-break-the-ui-into-a-component-hierarchy)
 
 ### Phase 2
 - Implement words collection
