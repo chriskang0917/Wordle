@@ -5,7 +5,7 @@
 - words collection
 
 ### Skills
-- [vite](https://vitejs.dev/guide/)
+- create-react-app
 - JavaScript / [TypeScript](https://react-typescript-cheatsheet.netlify.app/)
 - useState / [useReducer](https://beta.reactjs.org/reference/react/useReducer)
 - styled-components / [tailwind](https://tailwindcss.com/docs/guides/vite)
@@ -16,6 +16,8 @@
 ### Phase 1
 - Add wordle page
 - Implement wordle logic
+    - Colors
+    - Design state
 
 ### Phase 2
 - Implement words collection
