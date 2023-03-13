@@ -10,15 +10,15 @@
 - useState / [useReducer](https://beta.reactjs.org/reference/react/useReducer)
 - styled-components / [tailwind](https://tailwindcss.com/docs/guides/vite)
 
-### Phase 0
+### feature/phase-0
 - Setup Project
 
-### Phase 1
+### feature/phase-1
 - Add wordle page
 - Implement wordle logic
     - [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy-step-1-break-the-ui-into-a-component-hierarchy)
 
-### Phase 2
+### feature/phase-2
 - Implement words collection
 
 ## Advanced
@@ -29,11 +29,11 @@
     - email
     - point
 
-### Phase 3
+### feature/phase-3
 - Integrate firebase authentication
 - Add profile page
 
-### Phase 4
+### feature/phase-4
 - Add members Page
 - Sort members by points
 
