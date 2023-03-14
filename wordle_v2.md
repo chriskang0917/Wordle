@@ -8,17 +8,23 @@
 - create-react-app
 - JavaScript / [TypeScript](https://react-typescript-cheatsheet.netlify.app/)
 - useState / [useReducer](https://beta.reactjs.org/reference/react/useReducer)
-- styled-components / [tailwind](https://tailwindcss.com/docs/guides/vite)
+- styled-components / [tailwind](https://tailwindcss.com/docs/guides/create-react-app)
+- React
+    - [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy-step-1-break-the-ui-into-a-component-hierarchy)
 
 ### feature/phase-0
 - Setup Project
 
 ### feature/phase-1
-- Add wordle page
-- Implement wordle logic
-    - [Thinking in React](https://beta.reactjs.org/learn/thinking-in-react#step-1-break-the-ui-into-a-component-hierarchy-step-1-break-the-ui-into-a-component-hierarchy)
+- Create UI layout
 
 ### feature/phase-2
+- Design data structure & build static version
+
+### feature/phase-3
+- Implement logic & add user interactivity
+
+### feature/phase-4
 - Implement words collection
 
 ## Advanced
@@ -29,11 +35,11 @@
     - email
     - point
 
-### feature/phase-3
+### feature/phase-5
 - Integrate firebase authentication
 - Add profile page
 
-### feature/phase-4
+### feature/phase-6
 - Add members Page
 - Sort members by points
 
