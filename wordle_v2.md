@@ -5,7 +5,7 @@
 - words collection
 
 ### Skills
-- create-react-app
+- create-react-app / [create-next-app](https://nextjs.org/docs/getting-started/installation#automatic-installation) / [vite](https://vitejs.dev/guide/#getting-started)
 - JavaScript / [TypeScript](https://react-typescript-cheatsheet.netlify.app/)
 - useState / [useReducer](https://beta.reactjs.org/reference/react/useReducer)
 - styled-components / [tailwind](https://tailwindcss.com/docs/guides/create-react-app)
