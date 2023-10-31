@@ -1,7 +1,7 @@
 import { LetterState, computeGuess } from "../utils/word-utils";
 import Word from "./Word";
 
-const FAKE_WORDS: string[] = ["HELLO", "", "", "", "", ""];
+const FAKE_WORDS: string[] = ["HELLO", "HOW", "", "", "", ""];
 const ANSWER_WORD: string = "ALLOW";
 
 export default function Board() {
