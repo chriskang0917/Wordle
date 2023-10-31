@@ -5,7 +5,7 @@ import Word from "./Word";
 
 export default function Board() {
   const { state } = useContext(WordContext as React.Context<InitContext>);
-  const { wordRecords, answerWord, currentRowIndex } = state;
+  const { wordRecords, answerWord, currentRowIndex, hasWin } = state;
 
   const getGuessStates = (rowIndex: number, currentRowIndex: number) => {
     const guessWord: string = wordRecords[rowIndex];
@@ -37,6 +37,11 @@ export default function Board() {
           />
         ))}
       </section>
+      {hasWin && (
+        <div className="flex items-center justify-center pt-10">
+          <p className="text-2xl tracking-wide text-white">恭喜答對！</p>
+        </div>
+      )}
     </main>
   );
 }
