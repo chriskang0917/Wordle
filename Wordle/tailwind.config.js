@@ -2,7 +2,15 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        board: "repeat(6, 62px)",
+      },
+      colors: {
+        "letter-border": "rgb(58, 58, 60)",
+        "board-background": "rgb(15, 15, 16)",
+      },
+    },
   },
   plugins: [],
 };

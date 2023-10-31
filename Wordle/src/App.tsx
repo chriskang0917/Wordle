@@ -1,12 +1,12 @@
 import Board from "./components/Board";
-import Title from "./components/Title";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <main>
-      <Title />
+    <>
+      <Header />
       <Board />
-    </main>
+    </>
   );
 }
 
