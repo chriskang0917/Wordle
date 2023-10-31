@@ -7,7 +7,7 @@ export default {
         board: "repeat(6, 62px)",
       },
       colors: {
-        "letter-border": "rgb(58, 58, 60)",
+        border: "rgb(58, 58, 60)",
         "board-background": "rgb(15, 15, 16)",
       },
     },
