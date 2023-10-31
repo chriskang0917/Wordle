@@ -6,6 +6,14 @@ export enum LetterState {
   Miss = "miss",
 }
 
+export const letterStateStyle = {
+  [LetterState.Empty]: "",
+  [LetterState.Edit]: "border-[#585858]",
+  [LetterState.Present]: "bg-[#A7944A] border-none",
+  [LetterState.Match]: "bg-[#507749] border-none",
+  [LetterState.Miss]: "bg-[#333334] border-none",
+};
+
 export const computeGuess = (answer: string, guess: string): LetterState[] => {
   const splitAnswer: string[] = answer.split("");
   const splitGuess: string[] = guess.split("");

@@ -12,9 +12,6 @@ export default function Word({ word, states }: WordProps) {
 
   const fullWord: string[] = [...splitWord, ...remainingLetter];
 
-  console.log("word", word);
-  console.dir(states);
-
   return (
     <div className="gap grid grid-cols-5 gap-x-1">
       {fullWord.map((letter, index) => (

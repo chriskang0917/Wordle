@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LetterState, computeGuess } from "../utils/word-utils";
 import Word from "./Word";
 
-const FAKE_WORDS: string[] = ["HELLO", "HI", "", "", "", ""];
+const FAKE_WORDS: string[] = ["HELLO", "HOW", "", "", "", ""];
 const ANSWER_WORD: string = "ALLOW";
 
 export default function Board() {
@@ -10,7 +10,7 @@ export default function Board() {
   const [currentRow, setCurrentRow] = useState<number>(1);
 
   const getGuessStates = (rowIndex: number, currentRow: number) => {
-    const guessWord: string = wordRecords[rowIndex] || "";
+    const guessWord: string = wordRecords[rowIndex];
 
     if (rowIndex < currentRow) {
       return computeGuess(ANSWER_WORD, guessWord);
