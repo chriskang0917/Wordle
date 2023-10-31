@@ -7,7 +7,7 @@ export enum LetterState {
 }
 
 export const letterStateStyle = {
-  [LetterState.Empty]: "",
+  [LetterState.Empty]: "border-border",
   [LetterState.Edit]: "border-[#585858]",
   [LetterState.Present]: "bg-[#A7944A] border-none",
   [LetterState.Match]: "bg-[#507749] border-none",

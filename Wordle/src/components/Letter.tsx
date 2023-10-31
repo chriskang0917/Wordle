@@ -11,7 +11,7 @@ export default function Letter({ letter, state }: LetterProps) {
     <div
       className={cn(
         letterStateStyle[state],
-        "border-border flex max-w-[62px] items-center justify-center border-2",
+        "flex max-w-[62px] items-center justify-center border-2",
       )}
     >
       <p className="text-4xl font-bold text-white">{letter}</p>
