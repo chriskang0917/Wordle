@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer } from "react";
+import toast from "react-hot-toast";
 
 export interface IWordContext {
   wordRecords: string[];
@@ -58,7 +59,7 @@ const wordReducer = (state: IWordContext, action: Action) => {
       case "check_answer":
         if (state.currentRowIndex < maxRow && currentWord.length === 5) {
           if (state.answerWord === currentWord) {
-            console.log("You win!");
+            toast.success("恭喜答對！");
             return {
               ...state,
               hasWin: true,
@@ -69,8 +70,14 @@ const wordReducer = (state: IWordContext, action: Action) => {
           return { ...state, currentRowIndex: state.currentRowIndex + 1 };
         }
 
+        toast.error("請輸入五個字母");
+
         return state;
     }
+  }
+
+  if (!state.hasWin) {
+    toast.error("遊戲已結束");
   }
 
   return { ...initialState, hasWin: false };

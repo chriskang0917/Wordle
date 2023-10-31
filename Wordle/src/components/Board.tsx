@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Toaster } from "react-hot-toast";
 import WordContext, { InitContext } from "../store/WordProvider";
 import { LetterState, computeGuess } from "../utils/word-utils";
 import Word from "./Word";
@@ -42,6 +43,7 @@ export default function Board() {
           <p className="text-2xl tracking-wide text-white">恭喜答對！</p>
         </div>
       )}
+      <Toaster />
     </main>
   );
 }
