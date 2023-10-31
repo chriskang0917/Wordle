@@ -14,6 +14,7 @@ dist-ssr
 
 # Editor directories and files
 .vite
+.xmind
 .firebase
 .vscode/*
 !.vscode/extensions.json

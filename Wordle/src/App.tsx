@@ -1,5 +1,13 @@
+import Board from "./components/Board";
+import Header from "./components/Header";
+
 function App() {
-  return <h1 className="text-7xl">Welcome</h1>;
+  return (
+    <>
+      <Header />
+      <Board />
+    </>
+  );
 }
 
 export default App;
