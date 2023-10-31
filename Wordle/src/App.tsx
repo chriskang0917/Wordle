@@ -1,6 +1,6 @@
 import Board from "./components/Board";
 import Header from "./components/Header";
-import { WordProvider } from "./store/wordProvider";
+import { WordProvider } from "./store/WordProvider";
 
 function App() {
   return (

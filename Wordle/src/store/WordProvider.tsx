@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import React, { createContext, useReducer } from "react";
 
 export interface IWordContext {
   wordRecords: string[];
@@ -6,11 +6,16 @@ export interface IWordContext {
   currentRowIndex: number;
 }
 
-const WordContext = createContext<IWordContext>({
-  wordRecords: [],
-  answerWord: "",
-  currentRowIndex: 0,
-});
+interface Action {}
+
+export interface InitContext {
+  state: IWordContext;
+  dispatch?: React.Dispatch<Action>;
+}
+
+interface WordProviderProps {
+  children: React.ReactNode;
+}
 
 const initialState: IWordContext = {
   wordRecords: ["HELLO", "HOW", "", "", "", ""],
@@ -18,16 +23,21 @@ const initialState: IWordContext = {
   currentRowIndex: 1,
 };
 
-interface WordProviderProps {
-  children: React.ReactNode;
-}
+const WordContext = createContext<InitContext | IWordContext>(initialState);
 
-export const WordProvider = ({ children }: WordProviderProps) => {
-  // const [wordRecords, setWordRecords] = useState<string[]>(FAKE_WORDS);
-  // const [currentRow, setCurrentRow] = useState<number>(1);
+const wordReducer = (state: IWordContext, action: Action) => {
+  console.log("state", state);
+  console.log("action", action);
+  return initialState;
+};
+
+export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer(wordReducer, initialState);
 
   return (
-    <WordContext.Provider value={initialState}>{children}</WordContext.Provider>
+    <WordContext.Provider value={{ state, dispatch }}>
+      {children}
+    </WordContext.Provider>
   );
 };
 
