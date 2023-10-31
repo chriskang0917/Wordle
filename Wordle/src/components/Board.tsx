@@ -1,22 +1,17 @@
+import { useContext } from "react";
+import WordContext, { IWordContext } from "../store/wordProvider";
 import { LetterState, computeGuess } from "../utils/word-utils";
 import Word from "./Word";
 
-const FAKE_WORDS: string[] = ["HELLO", "HOW", "", "", "", ""];
-const ANSWER_WORD: string = "ALLOW";
-
 export default function Board() {
-  // const [wordRecords, setWordRecords] = useState<string[]>(FAKE_WORDS);
-  // const [currentRow, setCurrentRow] = useState<number>(1);
-
-  // JUST FOR TYPESCRIPT COMPILING PURPOSES
-  const wordRecords: string[] = FAKE_WORDS;
-  const currentRowIndex: number = 1;
+  const state: IWordContext = useContext(WordContext);
+  const { wordRecords, answerWord, currentRowIndex } = state;
 
   const getGuessStates = (rowIndex: number, currentRowIndex: number) => {
     const guessWord: string = wordRecords[rowIndex];
 
     if (rowIndex < currentRowIndex) {
-      return computeGuess(ANSWER_WORD, guessWord);
+      return computeGuess(answerWord, guessWord);
     }
 
     if (rowIndex === currentRowIndex) {
