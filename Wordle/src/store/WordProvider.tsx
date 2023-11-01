@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useReducer } from "react";
+import toast from "react-hot-toast";
 
 export interface IWordContext {
   wordRecords: string[];
   answerWord: string;
   currentRowIndex: number;
   hasWin: boolean;
-  // keyTyped: "empty" | "edit" | "check";
 }
 
 interface Action {
@@ -27,7 +27,6 @@ const initialState: IWordContext = {
   answerWord: "TRAIL",
   currentRowIndex: 0,
   hasWin: false,
-  // keyTyped: "empty",
 };
 
 const WordContext = createContext<InitContext | IWordContext>(initialState);
@@ -96,6 +95,15 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
       window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
+
+  const successMessage = "恭喜答對！";
+  const failedMessage = `很可惜沒有答對，答案是 ${state.answerWord}`;
+
+  useEffect(() => {
+    if (state.hasWin) toast.success(successMessage);
+    if (!state.hasWin && state.currentRowIndex === 6)
+      toast.error(failedMessage);
+  }, [state.hasWin, state.currentRowIndex]);
 
   return (
     <WordContext.Provider value={{ state, dispatch }}>
