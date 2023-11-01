@@ -1,4 +1,4 @@
-export enum LetterState {
+export const enum LetterState {
   Empty = "empty",
   Edit = "edit",
   Present = "present",
@@ -27,4 +27,26 @@ export const computeGuess = (answer: string, guess: string): LetterState[] => {
 
     return LetterState.Miss;
   });
+};
+
+export const enum AnimationState {
+  Edit = "edit",
+  Check = "check",
+}
+
+export const animationStateStyle = {
+  [AnimationState.Edit]: "animate-jump animate-duration-300",
+  [AnimationState.Check]:
+    "animate-rotate-x animate-duration-800 animate-ease-in-out",
+};
+
+export const getAnimatedState = (letter: string, state: LetterState) => {
+  const isEdit: boolean = state === LetterState.Edit;
+  const isChecked: boolean =
+    state === LetterState.Match ||
+    state === LetterState.Miss ||
+    state === LetterState.Present;
+
+  if (letter && isEdit) return animationStateStyle[AnimationState.Edit];
+  if (letter && isChecked) return animationStateStyle[AnimationState.Check];
 };

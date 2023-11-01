@@ -5,6 +5,7 @@ export interface IWordContext {
   answerWord: string;
   currentRowIndex: number;
   hasWin: boolean;
+  // keyTyped: "empty" | "edit" | "check";
 }
 
 interface Action {
@@ -26,23 +27,25 @@ const initialState: IWordContext = {
   answerWord: "TRAIL",
   currentRowIndex: 0,
   hasWin: false,
+  // keyTyped: "empty",
 };
 
 const WordContext = createContext<InitContext | IWordContext>(initialState);
 
 const wordReducer = (state: IWordContext, action: Action) => {
   const currentWord = state.wordRecords[state.currentRowIndex] || "";
+  const maxRow: number = 6;
+  const maxLetters: number = 5;
 
-  if (!state.hasWin && state.currentRowIndex < 6) {
+  if (!state.hasWin && state.currentRowIndex < maxRow) {
     switch (action.type) {
       case "add_letter":
-        if (currentWord.length < 5) {
+        if (currentWord.length < maxLetters) {
           const updatedWordRecords = [...state.wordRecords];
           updatedWordRecords[state.currentRowIndex] =
             currentWord + action.payload?.toUpperCase();
           return { ...state, wordRecords: updatedWordRecords };
         }
-
         return state;
 
       case "remove_letter":
@@ -51,7 +54,6 @@ const wordReducer = (state: IWordContext, action: Action) => {
           updatedWordRecords[state.currentRowIndex] = currentWord.slice(0, -1);
           return { ...state, wordRecords: updatedWordRecords };
         }
-
         return state;
 
       case "check_answer":
@@ -62,23 +64,18 @@ const wordReducer = (state: IWordContext, action: Action) => {
           return {
             ...state,
             hasWin: true,
-            notifyType: "success",
             currentRowIndex: state.currentRowIndex + 1,
           };
         }
-
         if (isCompleteWord && !isCorrectAnswer) {
           return {
             ...state,
-            notifyType: "error",
             currentRowIndex: state.currentRowIndex + 1,
           };
         }
-
         return state;
     }
   }
-
   return { ...initialState, hasWin: false };
 };
 
@@ -86,18 +83,12 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(wordReducer, initialState);
 
   useEffect(() => {
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (/^[a-zA-Z]$/.test(e.key)) {
-        dispatch({ type: "add_letter", payload: e.key });
-      }
+    const handleKeyUp = ({ key }: KeyboardEvent) => {
+      const isAlphabet = /^[a-zA-Z]$/.test(key);
 
-      if (e.key === "Backspace") {
-        dispatch({ type: "remove_letter" });
-      }
-
-      if (e.key === "Enter") {
-        dispatch({ type: "check_answer" });
-      }
+      if (isAlphabet) dispatch({ type: "add_letter", payload: key });
+      if (key === "Backspace") dispatch({ type: "remove_letter" });
+      if (key === "Enter") dispatch({ type: "check_answer" });
     };
 
     window.addEventListener("keyup", handleKeyUp);
