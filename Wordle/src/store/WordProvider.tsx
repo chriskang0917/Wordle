@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useReducer } from "react";
-import toast from "react-hot-toast";
 
 export interface IWordContext {
   wordRecords: string[];
@@ -24,7 +23,7 @@ interface WordProviderProps {
 
 const initialState: IWordContext = {
   wordRecords: ["", "", "", "", "", ""],
-  answerWord: "ALLOW",
+  answerWord: "TRAIL",
   currentRowIndex: 0,
   hasWin: false,
 };
@@ -33,7 +32,6 @@ const WordContext = createContext<InitContext | IWordContext>(initialState);
 
 const wordReducer = (state: IWordContext, action: Action) => {
   const currentWord = state.wordRecords[state.currentRowIndex] || "";
-  const maxRow: number = 6;
 
   if (!state.hasWin && state.currentRowIndex < 6) {
     switch (action.type) {
@@ -57,27 +55,28 @@ const wordReducer = (state: IWordContext, action: Action) => {
         return state;
 
       case "check_answer":
-        if (state.currentRowIndex < maxRow && currentWord.length === 5) {
-          if (state.answerWord === currentWord) {
-            toast.success("恭喜答對！");
-            return {
-              ...state,
-              hasWin: true,
-              currentRowIndex: state.currentRowIndex + 1,
-            };
-          }
+        const isCompleteWord = currentWord.length === 5;
+        const isCorrectAnswer = state.answerWord === currentWord;
 
-          return { ...state, currentRowIndex: state.currentRowIndex + 1 };
+        if (isCompleteWord && isCorrectAnswer) {
+          return {
+            ...state,
+            hasWin: true,
+            notifyType: "success",
+            currentRowIndex: state.currentRowIndex + 1,
+          };
         }
 
-        toast.error("請輸入五個字母");
+        if (isCompleteWord && !isCorrectAnswer) {
+          return {
+            ...state,
+            notifyType: "error",
+            currentRowIndex: state.currentRowIndex + 1,
+          };
+        }
 
         return state;
     }
-  }
-
-  if (!state.hasWin) {
-    toast.error("遊戲已結束");
   }
 
   return { ...initialState, hasWin: false };
