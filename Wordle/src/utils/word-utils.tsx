@@ -14,21 +14,13 @@ export const letterStateStyle = {
   [LetterState.Miss]: "bg-[#333334] border-none",
 };
 
-export const computeGuess = (answer: string, guess: string): LetterState[] => {
-  const splitAnswer: string[] = answer.split("");
-  const splitGuess: string[] = guess.split("");
+const getFilteredLetterMap = (splitAnswer: string[], splitGuess: string[]) => {
+  type LetterMap = { [key: string]: number };
 
-  const letterMap = splitAnswer.reduce(
-    (acc: { [key: string]: number }, curr: string) => {
-      if (acc[curr]) {
-        acc[curr] += 1;
-      } else {
-        acc[curr] = 1;
-      }
-      return acc;
-    },
-    {},
-  );
+  const letterMap = splitAnswer.reduce((acc: LetterMap, curr: string) => {
+    acc[curr] ? (acc[curr] += 1) : (acc[curr] = 1);
+    return acc;
+  }, {});
 
   splitGuess.forEach((letter, index) => {
     if (splitAnswer[index] === letter) {
@@ -36,22 +28,31 @@ export const computeGuess = (answer: string, guess: string): LetterState[] => {
     }
   });
 
+  return letterMap;
+};
+
+export const computeGuess = (answer: string, guess: string): LetterState[] => {
+  const splitAnswer: string[] = answer.split("");
+  const splitGuess: string[] = guess.split("");
+
+  const filteredLetterMap = getFilteredLetterMap(splitAnswer, splitGuess);
+
   return splitGuess.map((letter, index) => {
     const isMatch: boolean = splitAnswer[index] === letter;
     const isPresent: boolean = splitAnswer.includes(letter);
+    const letterCount: number = filteredLetterMap[letter];
 
     if (isMatch && isPresent) {
       return LetterState.Match;
     }
 
-    if (isPresent) {
-      if (letterMap[letter] > 0) {
-        letterMap[letter] -= 1;
-        return LetterState.Present;
-      }
-      if (letterMap[letter] === 0) {
-        return LetterState.Miss;
-      }
+    if (isPresent && letterCount > 0) {
+      filteredLetterMap[letter] -= 1;
+      return LetterState.Present;
+    }
+
+    if (isPresent && letterCount === 0) {
+      return LetterState.Miss;
     }
 
     return LetterState.Miss;
@@ -63,7 +64,7 @@ export const enum AnimationState {
   Check = "check",
 }
 
-export const animationStateStyle = {
+const animationStateStyle = {
   [AnimationState.Edit]: "animate-jump animate-duration-300",
   [AnimationState.Check]:
     "animate-rotate-x animate-duration-800 animate-ease-in-out",

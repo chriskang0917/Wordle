@@ -45,8 +45,9 @@ const wordReducer = (state: IWordContext, action: Action) => {
       case "add_letter":
         if (currentWord.length < maxLetters) {
           const updatedWordRecords = [...state.wordRecords];
-          updatedWordRecords[state.currentRowIndex] =
-            currentWord + action.payload?.toUpperCase();
+          const concatLetter = currentWord + action.payload?.toUpperCase();
+
+          updatedWordRecords[state.currentRowIndex] = concatLetter;
           return { ...state, wordRecords: updatedWordRecords };
         }
         return state;
@@ -54,7 +55,9 @@ const wordReducer = (state: IWordContext, action: Action) => {
       case "remove_letter":
         if (currentWord.length > 0) {
           const updatedWordRecords = [...state.wordRecords];
-          updatedWordRecords[state.currentRowIndex] = currentWord.slice(0, -1);
+          const removedLastLetter = currentWord.slice(0, -1);
+
+          updatedWordRecords[state.currentRowIndex] = removedLastLetter;
           return { ...state, wordRecords: updatedWordRecords };
         }
         return state;
@@ -89,8 +92,9 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
     if (!state.hasWin || state.currentRowIndex === 0) {
       const randomSeed: number = Math.floor(Math.random() * wordBank.length);
       const randomWord: string = wordBank[randomSeed].toUpperCase();
-      console.log("Answer: ", randomWord);
+
       dispatch({ type: "init_answer", payload: randomWord });
+      console.log("Answer: ", randomWord);
     }
   }, [state.hasWin]);
 

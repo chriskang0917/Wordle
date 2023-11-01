@@ -26,6 +26,8 @@ export default function Letter({ letter, state, order }: LetterProps) {
     state === LetterState.Miss ||
     state === LetterState.Present;
 
+  // TODO: 將旋轉的動畫，和狀態的顏色整理在一起顯示
+
   return (
     <div
       className={cn(
