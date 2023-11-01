@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
+import { wordBank } from "../assets/wordBank";
 
 export interface IWordContext {
   wordRecords: string[];
@@ -9,7 +10,7 @@ export interface IWordContext {
 }
 
 interface Action {
-  type: "add_letter" | "remove_letter" | "check_answer";
+  type: "init_answer" | "add_letter" | "remove_letter" | "check_answer";
   payload?: string;
 }
 
@@ -24,7 +25,7 @@ interface WordProviderProps {
 
 const initialState: IWordContext = {
   wordRecords: ["", "", "", "", "", ""],
-  answerWord: "TRAIL",
+  answerWord: "",
   currentRowIndex: 0,
   hasWin: false,
 };
@@ -38,6 +39,9 @@ const wordReducer = (state: IWordContext, action: Action) => {
 
   if (!state.hasWin && state.currentRowIndex < maxRow) {
     switch (action.type) {
+      case "init_answer":
+        return { ...state, answerWord: action.payload || "" };
+
       case "add_letter":
         if (currentWord.length < maxLetters) {
           const updatedWordRecords = [...state.wordRecords];
@@ -82,6 +86,14 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(wordReducer, initialState);
 
   useEffect(() => {
+    if (!state.hasWin || state.currentRowIndex === 0) {
+      const randomSeed: number = Math.floor(Math.random() * wordBank.length);
+      const randomWord: string = wordBank[randomSeed].toUpperCase();
+      dispatch({ type: "init_answer", payload: randomWord });
+    }
+  }, [state.hasWin]);
+
+  useEffect(() => {
     const handleKeyUp = ({ key }: KeyboardEvent) => {
       const isAlphabet = /^[a-zA-Z]$/.test(key);
 
@@ -100,8 +112,9 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
   const failedMessage = `很可惜沒有答對，答案是 ${state.answerWord}`;
 
   useEffect(() => {
+    const maxRow: number = 6;
     if (state.hasWin) toast.success(successMessage);
-    if (!state.hasWin && state.currentRowIndex === 6)
+    if (!state.hasWin && state.currentRowIndex === maxRow)
       toast.error(failedMessage);
   }, [state.hasWin, state.currentRowIndex]);
 
