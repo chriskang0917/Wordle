@@ -26,15 +26,13 @@ export default function Letter({ letter, state, order }: LetterProps) {
     state === LetterState.Miss ||
     state === LetterState.Present;
 
-  // TODO: 將旋轉的動畫，和狀態的顏色整理在一起顯示
-
   return (
     <div
       className={cn(
         letterAnimationStyle,
         letterStateStyle[state],
         { [animationDelay[order]]: isWordChecked },
-        "flex max-w-[62px] items-center justify-center border-2",
+        "flex max-w-[62px] items-center justify-center border-2 border-border",
       )}
     >
       <p className="text-4xl font-bold text-white">{letter}</p>

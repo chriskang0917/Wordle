@@ -65,9 +65,8 @@ export const enum AnimationState {
 }
 
 const animationStateStyle = {
-  [AnimationState.Edit]: "animate-jump animate-duration-300",
-  [AnimationState.Check]:
-    "animate-rotate-x animate-duration-800 animate-ease-in-out",
+  [AnimationState.Edit]: "animate-jump animate-duration-100",
+  [AnimationState.Check]: "animate-rotate-x animate-ease-in-out",
 };
 
 export const getAnimatedState = (letter: string, state: LetterState) => {
