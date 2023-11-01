@@ -1,25 +1,20 @@
+import { useContext } from "react";
+import WordContext, { InitContext } from "../store/WordProvider";
 import { LetterState, computeGuess } from "../utils/word-utils";
 import Word from "./Word";
 
-const FAKE_WORDS: string[] = ["HELLO", "HOW", "", "", "", ""];
-const ANSWER_WORD: string = "ALLOW";
-
 export default function Board() {
-  // const [wordRecords, setWordRecords] = useState<string[]>(FAKE_WORDS);
-  // const [currentRow, setCurrentRow] = useState<number>(1);
+  const { state } = useContext(WordContext as React.Context<InitContext>);
+  const { wordRecords, answerWord, currentRowIndex } = state;
 
-  // JUST FOR TYPESCRIPT COMPILING PURPOSES
-  const wordRecords: string[] = FAKE_WORDS;
-  const currentRow: number = 1;
-
-  const getGuessStates = (rowIndex: number, currentRow: number) => {
+  const getGuessStates = (rowIndex: number, currentRowIndex: number) => {
     const guessWord: string = wordRecords[rowIndex];
 
-    if (rowIndex < currentRow) {
-      return computeGuess(ANSWER_WORD, guessWord);
+    if (rowIndex < currentRowIndex) {
+      return computeGuess(answerWord, guessWord);
     }
 
-    if (rowIndex === currentRow) {
+    if (rowIndex === currentRowIndex) {
       const wordLength: number = guessWord.length;
       const editedState = Array(wordLength).fill(LetterState.Edit);
       const remainState = Array(5 - wordLength).fill(LetterState.Empty);
@@ -32,13 +27,13 @@ export default function Board() {
   };
 
   return (
-    <main className="bg-board-background h-[100vh]">
-      <section className="grid-rows-board mx-auto grid max-w-[350px] gap-y-1 pt-[80px]">
+    <main className="h-[100vh] bg-board-background">
+      <section className="mx-auto grid max-w-[350px] grid-rows-board gap-y-1 pt-[80px]">
         {wordRecords.map((word: string, rowIndex: number) => (
           <Word
             key={rowIndex}
             word={word}
-            states={getGuessStates(rowIndex, currentRow)}
+            states={getGuessStates(rowIndex, currentRowIndex)}
           />
         ))}
       </section>
