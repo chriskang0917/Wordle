@@ -18,12 +18,41 @@ export const computeGuess = (answer: string, guess: string): LetterState[] => {
   const splitAnswer: string[] = answer.split("");
   const splitGuess: string[] = guess.split("");
 
+  const letterMap = splitAnswer.reduce(
+    (acc: { [key: string]: number }, curr: string) => {
+      if (acc[curr]) {
+        acc[curr] += 1;
+      } else {
+        acc[curr] = 1;
+      }
+      return acc;
+    },
+    {},
+  );
+
+  splitGuess.forEach((letter, index) => {
+    if (splitAnswer[index] === letter) {
+      letterMap[letter] -= 1;
+    }
+  });
+
   return splitGuess.map((letter, index) => {
     const isMatch: boolean = splitAnswer[index] === letter;
     const isPresent: boolean = splitAnswer.includes(letter);
 
-    if (isMatch && isPresent) return LetterState.Match;
-    if (isPresent) return LetterState.Present;
+    if (isMatch && isPresent) {
+      return LetterState.Match;
+    }
+
+    if (isPresent) {
+      if (letterMap[letter] > 0) {
+        letterMap[letter] -= 1;
+        return LetterState.Present;
+      }
+      if (letterMap[letter] === 0) {
+        return LetterState.Miss;
+      }
+    }
 
     return LetterState.Miss;
   });

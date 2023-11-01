@@ -89,6 +89,7 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
     if (!state.hasWin || state.currentRowIndex === 0) {
       const randomSeed: number = Math.floor(Math.random() * wordBank.length);
       const randomWord: string = wordBank[randomSeed].toUpperCase();
+      console.log("Answer: ", randomWord);
       dispatch({ type: "init_answer", payload: randomWord });
     }
   }, [state.hasWin]);
