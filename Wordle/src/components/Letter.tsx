@@ -14,10 +14,11 @@ interface LetterProps {
 
 export default function Letter({ letter, state, order }: LetterProps) {
   const letterAnimationStyle = getAnimatedState(letter, state);
-  const isWordChecked: boolean =
-    state === LetterState.Match ||
-    state === LetterState.Miss ||
-    state === LetterState.Present;
+  const isWordChecked: boolean = [
+    LetterState.Match,
+    LetterState.Miss,
+    LetterState.Present,
+  ].includes(state);
 
   return (
     <div

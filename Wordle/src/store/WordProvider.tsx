@@ -32,9 +32,10 @@ const initialState: IWordContext = {
 
 const WordContext = createContext<InitContext | IWordContext>(initialState);
 
+const maxRow: number = 6;
+
 const wordReducer = (state: IWordContext, action: Action) => {
   const currentWord = state.wordRecords[state.currentRowIndex] || "";
-  const maxRow: number = 6;
   const maxLetters: number = 5;
 
   if (!state.hasWin && state.currentRowIndex < maxRow) {
@@ -64,22 +65,15 @@ const wordReducer = (state: IWordContext, action: Action) => {
 
       case "check_answer":
         const isCompleteWord = currentWord.length === 5;
-        const isCorrectAnswer = state.answerWord === currentWord;
 
-        if (isCompleteWord && isCorrectAnswer) {
-          return {
-            ...state,
-            hasWin: true,
-            currentRowIndex: state.currentRowIndex + 1,
-          };
-        }
-        if (isCompleteWord && !isCorrectAnswer) {
-          return {
-            ...state,
-            currentRowIndex: state.currentRowIndex + 1,
-          };
-        }
-        return state;
+        if (!isCompleteWord) return state;
+
+        const isCorrectAnswer = state.answerWord === currentWord;
+        const currentRowIndex = state.currentRowIndex + 1;
+
+        return isCorrectAnswer
+          ? { ...state, currentRowIndex, hasWin: true }
+          : { ...state, currentRowIndex };
     }
   }
   return { ...initialState, hasWin: false };
@@ -113,11 +107,10 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
     };
   }, []);
 
-  const successMessage = "恭喜答對！";
-  const failedMessage = `很可惜沒有答對，答案是 ${state.answerWord}`;
-
   useEffect(() => {
-    const maxRow: number = 6;
+    const successMessage = "恭喜答對！";
+    const failedMessage = `很可惜沒有答對，答案是 ${state.answerWord}`;
+
     if (state.hasWin) toast.success(successMessage);
     if (!state.hasWin && state.currentRowIndex === maxRow)
       toast.error(failedMessage);
