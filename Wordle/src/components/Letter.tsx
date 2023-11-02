@@ -1,17 +1,33 @@
 import cn from "classnames";
-import { LetterState, letterStateStyle } from "../utils/word-utils";
+import {
+  LetterState,
+  animationDelayStyle,
+  getAnimatedState,
+  letterStateStyle,
+} from "../utils/word-utils";
 
 interface LetterProps {
   letter: string;
   state: LetterState;
+  order: number;
 }
 
-export default function Letter({ letter, state }: LetterProps) {
+export default function Letter({ letter, state, order }: LetterProps) {
+  const letterAnimationStyle = getAnimatedState(letter, state);
+  const isWordChecked: boolean = [
+    LetterState.Match,
+    LetterState.Miss,
+    LetterState.Present,
+  ].includes(state);
+
   return (
     <div
       className={cn(
+        letterAnimationStyle,
         letterStateStyle[state],
-        "flex max-w-[62px] items-center justify-center border-2",
+        { [animationDelayStyle[order]]: isWordChecked },
+        "transition-colors duration-[800ms] ease-in-out",
+        "flex max-w-[62px] items-center justify-center border-2 border-border",
       )}
     >
       <p className="text-4xl font-bold text-white">{letter}</p>

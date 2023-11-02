@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "site": "chris-wordle-phase-2",
+    "site": "chris-wordle-phase-3",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
