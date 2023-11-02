@@ -1,6 +1,7 @@
 import cn from "classnames";
 import {
   LetterState,
+  animationDelayStyle,
   getAnimatedState,
   letterStateStyle,
 } from "../utils/word-utils";
@@ -10,14 +11,6 @@ interface LetterProps {
   state: LetterState;
   order: number;
 }
-
-const animationDelay = [
-  "animate-delay-0",
-  "animate-delay-[400ms]",
-  "animate-delay-[800ms]",
-  "animate-delay-[1200ms]",
-  "animate-delay-[1600ms]",
-];
 
 export default function Letter({ letter, state, order }: LetterProps) {
   const letterAnimationStyle = getAnimatedState(letter, state);
@@ -31,8 +24,8 @@ export default function Letter({ letter, state, order }: LetterProps) {
       className={cn(
         letterAnimationStyle,
         letterStateStyle[state],
-        { [animationDelay[order]]: isWordChecked },
-        "flex max-w-[62px] items-center justify-center border-2 border-border",
+        { [animationDelayStyle[order]]: isWordChecked },
+        "flex max-w-[62px] items-center justify-center border-2 border-border transition-colors ease-in-out",
       )}
     >
       <p className="text-4xl font-bold text-white">{letter}</p>

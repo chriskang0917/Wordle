@@ -6,13 +6,31 @@ export const enum LetterState {
   Miss = "miss",
 }
 
+export const enum AnimationState {
+  Edit = "edit",
+  Check = "check",
+}
+
 export const letterStateStyle = {
   [LetterState.Empty]: "border-border",
   [LetterState.Edit]: "border-[#585858]",
-  [LetterState.Present]: "bg-[#A7944A] border-none",
-  [LetterState.Match]: "bg-[#507749] border-none",
-  [LetterState.Miss]: "bg-[#333334] border-none",
+  [LetterState.Present]: "bg-[#A7944A]",
+  [LetterState.Match]: "bg-[#507749]",
+  [LetterState.Miss]: "bg-[#333334]",
 };
+
+const animationStateStyle = {
+  [AnimationState.Edit]: "animate-jump animate-duration-100",
+  [AnimationState.Check]: "animate-rotate-x animate-ease-in-out",
+};
+
+export const animationDelayStyle = [
+  "animate-delay-0 delay-0",
+  "animate-delay-[400ms] delay-[400ms]",
+  "animate-delay-[800ms] delay-[800ms]",
+  "animate-delay-[1200ms] delay-[1200ms]",
+  "animate-delay-[1600ms] delay-[1600ms]",
+];
 
 const getFilteredAnswerLetterMap = (
   splitAnswer: string[],
@@ -56,16 +74,6 @@ export const computeGuess = (answer: string, guess: string): LetterState[] => {
 
     return LetterState.Miss;
   });
-};
-
-export const enum AnimationState {
-  Edit = "edit",
-  Check = "check",
-}
-
-const animationStateStyle = {
-  [AnimationState.Edit]: "animate-jump animate-duration-100",
-  [AnimationState.Check]: "animate-rotate-x animate-ease-in-out",
 };
 
 export const getAnimatedState = (letter: string, state: LetterState) => {
