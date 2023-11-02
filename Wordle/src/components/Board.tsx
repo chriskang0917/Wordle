@@ -6,7 +6,7 @@ import Word from "./Word";
 
 export default function Board() {
   const { state } = useContext(WordContext as React.Context<InitContext>);
-  const { wordRecords, answerWord, currentRowIndex, hasWin } = state;
+  const { wordRecords, answerWord, currentRowIndex } = state;
 
   const getGuessStates = (rowIndex: number, currentRowIndex: number) => {
     const guessWord: string = wordRecords[rowIndex];
@@ -28,7 +28,7 @@ export default function Board() {
   };
 
   return (
-    <main className="h-[100vh] bg-board-background">
+    <>
       <section className="mx-auto grid max-w-[350px] grid-rows-board gap-y-1 pt-[80px]">
         {wordRecords.map((word: string, rowIndex: number) => (
           <Word
@@ -38,12 +38,12 @@ export default function Board() {
           />
         ))}
       </section>
-      {hasWin && (
+      {/* {hasWin && (
         <div className="flex items-center justify-center pt-10">
           <p className="text-2xl tracking-wide text-white">恭喜答對！</p>
         </div>
-      )}
+      )} */}
       <Toaster />
-    </main>
+    </>
   );
 }
