@@ -38,11 +38,6 @@ export default function Board() {
           />
         ))}
       </section>
-      {/* {hasWin && (
-        <div className="flex items-center justify-center pt-10">
-          <p className="text-2xl tracking-wide text-white">恭喜答對！</p>
-        </div>
-      )} */}
       <Toaster />
     </>
   );

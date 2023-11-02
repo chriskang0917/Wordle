@@ -79,6 +79,12 @@ const wordReducer = (state: IWordContext, action: Action) => {
         return isCorrectAnswer
           ? { ...state, currentRowIndex, hasWin: true }
           : { ...state, currentRowIndex };
+
+      case "reset_answer":
+        const randomWord: string = getRandomWord();
+
+        console.log("Answer: ", randomWord);
+        return { ...initialState, answerWord: randomWord };
     }
   }
   return initialState;
@@ -112,7 +118,7 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const successMessage = "恭喜答對！";
+    const successMessage = "恭喜答對！按下 Enter 或左下方按鈕再來一局 ";
     const failedMessage = `很可惜沒有答對，答案是 ${state.answerWord}`;
 
     if (state.hasWin) toast.success(successMessage);

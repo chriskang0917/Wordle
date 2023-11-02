@@ -7,7 +7,7 @@ type ContextType = React.Context<InitContext>;
 
 export default function Actions() {
   const { state, dispatch } = useContext(WordContext as ContextType);
-  const { answerWord } = state;
+  const { answerWord, hasWin } = state;
 
   const dispatchReset = () => {
     if (typeof dispatch !== "function") return;
@@ -15,8 +15,8 @@ export default function Actions() {
   };
 
   const handleAnswer = () => {
+    if (!hasWin) toast.error(`很可惜沒能完成，答案是 ${answerWord}`);
     dispatchReset();
-    toast.error(`很可惜沒能完成，答案是 ${answerWord}`);
   };
 
   const handleRestart = () => {};
@@ -29,7 +29,7 @@ export default function Actions() {
         color="warning"
         onClick={handleAnswer}
       >
-        查看答案
+        {hasWin ? "再來一局" : "查看答案"}
       </Button>
       <Button
         className="text-md tracking-wider"
