@@ -25,7 +25,8 @@ export default function Letter({ letter, state, order }: LetterProps) {
         letterAnimationStyle,
         letterStateStyle[state],
         { [animationDelayStyle[order]]: isWordChecked },
-        "flex max-w-[62px] items-center justify-center border-2 border-border transition-colors ease-in-out",
+        "transition-colors duration-[800ms] ease-in-out",
+        "flex max-w-[62px] items-center justify-center border-2 border-border",
       )}
     >
       <p className="text-4xl font-bold text-white">{letter}</p>

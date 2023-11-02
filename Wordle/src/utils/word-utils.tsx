@@ -21,7 +21,8 @@ export const letterStateStyle = {
 
 const animationStateStyle = {
   [AnimationState.Edit]: "animate-jump animate-duration-100",
-  [AnimationState.Check]: "animate-rotate-x animate-ease-in-out",
+  [AnimationState.Check]:
+    "animate-rotate-x animate-ease-in-out animation-duration-[800ms]",
 };
 
 export const animationDelayStyle = [
