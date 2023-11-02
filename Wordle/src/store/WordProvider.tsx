@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
-import { wordBank } from "../assets/wordBank";
+import { getRandomWord } from "../utils/word-utils";
 
 export interface IWordContext {
   wordRecords: string[];
@@ -10,7 +10,12 @@ export interface IWordContext {
 }
 
 interface Action {
-  type: "init_answer" | "add_letter" | "remove_letter" | "check_answer";
+  type:
+    | "init_answer"
+    | "add_letter"
+    | "remove_letter"
+    | "check_answer"
+    | "reset_answer";
   payload?: string;
 }
 
@@ -76,7 +81,7 @@ const wordReducer = (state: IWordContext, action: Action) => {
           : { ...state, currentRowIndex };
     }
   }
-  return { ...initialState, hasWin: false };
+  return initialState;
 };
 
 export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
@@ -84,8 +89,7 @@ export const WordProvider: React.FC<WordProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (!state.hasWin || state.currentRowIndex === 0) {
-      const randomSeed: number = Math.floor(Math.random() * wordBank.length);
-      const randomWord: string = wordBank[randomSeed].toUpperCase();
+      const randomWord: string = getRandomWord();
 
       dispatch({ type: "init_answer", payload: randomWord });
       console.log("Answer: ", randomWord);

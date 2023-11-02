@@ -1,3 +1,5 @@
+import { wordBank } from "../assets/wordBank";
+
 export const enum LetterState {
   Empty = "empty",
   Edit = "edit",
@@ -32,6 +34,11 @@ export const animationDelayStyle = [
   "animate-delay-[1200ms] delay-[1200ms]",
   "animate-delay-[1600ms] delay-[1600ms]",
 ];
+
+export const getRandomWord = () => {
+  const randomSeed: number = Math.floor(Math.random() * wordBank.length);
+  return wordBank[randomSeed].toUpperCase();
+};
 
 const getFilteredAnswerLetterMap = (
   splitAnswer: string[],
