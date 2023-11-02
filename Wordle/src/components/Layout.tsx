@@ -1,3 +1,4 @@
+import Actions from "./Actions";
 import Board from "./Board";
 import Header from "./Header";
 
@@ -7,6 +8,7 @@ export default function Layout() {
       <Header />
       <main className="h-[100vh] bg-board-background">
         <Board />
+        <Actions />
       </main>
     </>
   );

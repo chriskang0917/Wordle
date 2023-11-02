@@ -29,7 +29,7 @@ export default function Board() {
 
   return (
     <>
-      <section className="mx-auto grid max-w-[350px] grid-rows-board gap-y-1 pt-[80px]">
+      <section className="mx-auto grid max-w-[350px] grid-rows-board gap-y-1 pt-[150px]">
         {wordRecords.map((word: string, rowIndex: number) => (
           <Word
             key={rowIndex}
