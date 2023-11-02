@@ -14,7 +14,10 @@ export const letterStateStyle = {
   [LetterState.Miss]: "bg-[#333334] border-none",
 };
 
-const getFilteredLetterMap = (splitAnswer: string[], splitGuess: string[]) => {
+const getFilteredAnswerLetterMap = (
+  splitAnswer: string[],
+  splitGuess: string[],
+) => {
   type LetterMap = { [key: string]: number };
 
   const letterMap = splitAnswer.reduce((acc: LetterMap, curr: string) => {
@@ -35,25 +38,21 @@ export const computeGuess = (answer: string, guess: string): LetterState[] => {
   const splitAnswer: string[] = answer.split("");
   const splitGuess: string[] = guess.split("");
 
-  const filteredLetterMap = getFilteredLetterMap(splitAnswer, splitGuess);
+  const filteredLetterMap = getFilteredAnswerLetterMap(splitAnswer, splitGuess);
 
   return splitGuess.map((letter, index) => {
     const isMatch: boolean = splitAnswer[index] === letter;
     const isPresent: boolean = splitAnswer.includes(letter);
     const letterCount: number = filteredLetterMap[letter];
 
-    if (isMatch && isPresent) {
-      return LetterState.Match;
-    }
+    if (isMatch && isPresent) return LetterState.Match;
 
     if (isPresent && letterCount > 0) {
       filteredLetterMap[letter] -= 1;
       return LetterState.Present;
     }
 
-    if (isPresent && letterCount === 0) {
-      return LetterState.Miss;
-    }
+    if (isPresent && letterCount === 0) return LetterState.Miss;
 
     return LetterState.Miss;
   });
