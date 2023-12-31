@@ -45,10 +45,10 @@ A clone of world famous word-guessing game.
 
 ### Display rules and reset game
 
-<img src="./public/rules_and_reset.gif" style="width:700px" alt="seek rule and reset game" />
+<img src="./public/rules_and_reset.gif" style="width:500px" alt="seek rule and reset game" />
 
 ### Guess Word
 
 ###### Play Wordle by directly typing the guessing word and hit `Enter`
 
-<img src="./public/play.gif" style="width:700px" alt="Progress of playing" />
+<img src="./public/play.gif" style="width:500px" alt="Progress of playing" />
