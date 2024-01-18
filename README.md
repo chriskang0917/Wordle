@@ -43,6 +43,8 @@ A clone of world famous word-guessing game.
 
 ## Demo
 
+[Wordle Demo](https://chris-wordle-phase-4.web.app/)
+
 ### Display rules and reset game
 
 <img src="./Wordle/public/rules_and_reset.gif" style="width:500px" alt="seek rule and reset game" />
